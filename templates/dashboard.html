@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — AI Data Analyst{% endblock %}
+{% block nav_dashboard %}active{% endblock %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Dashboard</h2>
+    <p>Overview of your data analytics and insights</p>
+</div>
+
+<!-- KPI Cards -->
+<div class="card-grid card-grid-4" id="kpi-section">
+    <div class="card kpi-card accent">
+        <div class="kpi-label">Total Records</div>
+        <div class="kpi-value" id="kpi-total">—</div>
+        <div class="kpi-sub">All data entries</div>
+    </div>
+    <div class="card kpi-card success">
+        <div class="kpi-label">Avg Salary</div>
+        <div class="kpi-value" id="kpi-salary">—</div>
+        <div class="kpi-sub">Across all records</div>
+    </div>
+    <div class="card kpi-card warning">
+        <div class="kpi-label">Avg Performance</div>
+        <div class="kpi-value" id="kpi-score">—</div>
+        <div class="kpi-sub">Score out of 100</div>
+    </div>
+    <div class="card kpi-card info">
+        <div class="kpi-label">Total Salary</div>
+        <div class="kpi-value" id="kpi-total-salary">—</div>
+        <div class="kpi-sub">Combined payroll</div>
+    </div>
+</div>
+
+<!-- Charts -->
+<div class="card-grid card-grid-2 mt-lg">
+    <div class="card chart-card">
+        <h3>Salary by Department</h3>
+        <div class="chart-wrapper">
+            <canvas id="chart-department-salary"></canvas>
+        </div>
+    </div>
+    <div class="card chart-card">
+        <h3>Performance by Department</h3>
+        <div class="chart-wrapper">
+            <canvas id="chart-department-score"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="card-grid card-grid-2 mt-lg">
+    <div class="card chart-card">
+        <h3>Monthly Trends — Salary</h3>
+        <div class="chart-wrapper">
+            <canvas id="chart-trend-salary"></canvas>
+        </div>
+    </div>
+    <div class="card chart-card">
+        <h3>Department Distribution</h3>
+        <div class="chart-wrapper">
+            <canvas id="chart-dept-pie"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- AI Insights -->
+<div class="card mt-lg" id="ai-insights-card">
+    <h3 style="font-size: 15px; font-weight: 600; margin-bottom: 16px;">🤖 AI Quick Insights</h3>
+    <div id="ai-insights" style="color: var(--text-secondary); font-size: 14px; line-height: 1.8;">
+        <p>Loading AI insights...</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

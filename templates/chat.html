@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}AI Chat — AI Data Analyst{% endblock %}
+{% block nav_chat %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>🤖 AI Data Assistant</h2>
+    <p>Ask questions about your data in natural language</p>
+</div>
+
+<div class="chat-container">
+    <div class="chat-messages" id="chat-messages">
+        <!-- Welcome message -->
+        <div class="chat-message ai">
+            <div class="message-avatar">🤖</div>
+            <div class="message-bubble">
+                <strong>Hello!</strong> I'm your AI data assistant. I can analyze your stored data and answer questions
+                like:<br><br>
+                • "Which department has the highest average salary?"<br>
+                • "What is the average performance score?"<br>
+                • "Show me a summary of all departments"<br>
+                • "Who are the top performers?"<br><br>
+                Ask me anything about your data! 📊
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-input-area">
+        <input type="text" id="chat-input" class="form-input" placeholder="Ask a question about your data..."
+            onkeydown="if(event.key === 'Enter') sendMessage()">
+        <button class="btn btn-primary" onclick="sendMessage()" id="send-btn">➤</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/chat.js"></script>
+{% endblock %}

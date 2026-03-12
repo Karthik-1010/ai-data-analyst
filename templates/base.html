@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI Data Analyst{% endblock %}</title>
+    <meta name="description" content="AI-powered Data Analysis & Insights Web Application">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% block body %}
+    <!-- Mobile menu toggle -->
+    <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="logo">🔮</div>
+                <h1>AI Analyst</h1>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="/dashboard" class="nav-link {% block nav_dashboard %}{% endblock %}" id="nav-dashboard">
+                    <span class="icon">📊</span> Dashboard
+                </a>
+                <a href="/data/add" class="nav-link {% block nav_add %}{% endblock %}" id="nav-add">
+                    <span class="icon">➕</span> Add Data
+                </a>
+                <a href="/data/list" class="nav-link {% block nav_list %}{% endblock %}" id="nav-list">
+                    <span class="icon">📋</span> View Data
+                </a>
+                <a href="/chat" class="nav-link {% block nav_chat %}{% endblock %}" id="nav-chat">
+                    <span class="icon">🤖</span> AI Chat
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="user-avatar">?</div>
+                    <div class="user-details">
+                        <div class="user-name" id="user-name">Loading...</div>
+                        <div class="user-role" id="user-role">—</div>
+                    </div>
+                </div>
+                <a href="#" class="nav-link" onclick="logout()" style="margin-top: 8px; color: var(--danger);">
+                    <span class="icon">🚪</span> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    {% endblock %}
+
+    <!-- Toast container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="/static/js/app.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

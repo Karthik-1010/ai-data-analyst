@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}View Data — AI Data Analyst{% endblock %}
+{% block nav_list %}active{% endblock %}
+
+{% block content %}
+<div class="page-header flex justify-between items-center">
+    <div>
+        <h2>Data Records</h2>
+        <p>View and manage your submitted data</p>
+    </div>
+    <div style="display: flex; gap: 10px;">
+        <button onclick="downloadExcel()" class="btn btn-secondary">📥 Download Excel</button>
+        <a href="/data/add" class="btn btn-primary">➕ Add Record</a>
+    </div>
+</div>
+
+<!-- Filters -->
+<div class="card" style="margin-bottom: 20px;">
+    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+        <select id="filter-department" class="form-input" style="width: auto; min-width: 180px;"
+            onchange="loadRecords()">
+            <option value="">All Departments</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Sales">Sales</option>
+            <option value="HR">HR</option>
+            <option value="Finance">Finance</option>
+            <option value="Operations">Operations</option>
+            <option value="Design">Design</option>
+            <option value="Product">Product</option>
+        </select>
+        <span style="color: var(--text-muted); font-size: 13px;" id="record-count">Loading...</span>
+    </div>
+</div>
+
+<!-- Data Table -->
+<div class="table-wrapper">
+    <table class="data-table" id="data-table">
+        <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Department</th>
+                <th>Salary</th>
+                <th>Score</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 40px;">
+                    Loading records...
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+<div style="display: flex; justify-content: center; gap: 8px; margin-top: 20px;" id="pagination"></div>
+
+<!-- Edit Modal -->
+<div id="edit-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Edit Record</h3>
+        </div>
+        <form id="edit-form" onsubmit="handleUpdateData(event)">
+            <input type="hidden" id="edit-id">
+            <div class="form-group">
+                <label for="edit-name">Employee Name</label>
+                <input type="text" id="edit-name" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label for="edit-department">Department</label>
+                <select id="edit-department" class="form-input" required>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Sales">Sales</option>
+                    <option value="HR">HR</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Operations">Operations</option>
+                    <option value="Design">Design</option>
+                    <option value="Product">Product</option>
+                </select>
+            </div>
+            <div class="flex gap-md">
+                <div class="form-group" style="flex: 1;">
+                    <label for="edit-salary">Salary ($)</label>
+                    <input type="number" id="edit-salary" class="form-input" required min="0" step="1">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label for="edit-score">Performance (0-100)</label>
+                    <input type="number" id="edit-score" class="form-input" required min="0" max="100" step="0.1">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="edit-date">Record Date</label>
+                <input type="date" id="edit-date" class="form-input" required>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="update-btn">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/data.js"></script>
+<script>loadRecords();</script>
+{% endblock %}
